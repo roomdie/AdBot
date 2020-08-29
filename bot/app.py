@@ -1,8 +1,6 @@
 from loader import bot, storage
-
-# user_token =
-# req = requests.post("https://api.telegram.org/bot{}/getMe".format(user_token))
-# if req.status_code == 200:
+from aiogram import executor
+from config import admin_id
 
 
 async def on_shutdown(dp):
@@ -10,9 +8,10 @@ async def on_shutdown(dp):
     await storage.close()
 
 
-if __name__ == '__main__':
-    from aiogram import executor
-    from handlers import dp
+async def on_startup(dp):
+    await bot.send_message(admin_id, "Я запущен!")
 
-    executor.start_polling(dp, on_shutdown=on_shutdown)
+if __name__ == '__main__':
+    from handlers.main import dp
+    executor.start_polling(dp, on_shutdown=on_shutdown, on_startup=on_startup)
 

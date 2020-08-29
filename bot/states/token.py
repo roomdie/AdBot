@@ -8,4 +8,4 @@ class UserToken(StatesGroup):
 
 
 class ChannelId(StatesGroup):
-    id = State()
+    channel_id = State()
